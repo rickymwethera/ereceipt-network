@@ -1,0 +1,29 @@
+[project]
+name = "ereceipt-network"
+version = "0.1.0"
+description = "Receipt inbox: collect, verify and export KRA eTIMS receipts for small businesses."
+requires-python = ">=3.13"
+dependencies = [
+    "django>=6.1,<6.2",
+    "django-environ>=0.14",
+    "psycopg[binary]>=3.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-django>=4.14.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["**/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "DJ"]
