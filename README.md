@@ -43,6 +43,39 @@ uv run python -c "from django.core.management.utils import get_random_secret_key
 | `make lint` | ruff lint + format check (same as CI) |
 | `make fmt`  | auto-fix lint and formatting          |
 
+## Deploying
+
+The app runs on [Render](https://render.com) (Frankfurt region) with a
+[Neon](https://neon.tech) Postgres database (also Frankfurt).
+Render redeploys automatically when the deploy branch changes.
+
+**Build command**
+
+```
+pip install uv && uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate
+```
+
+**Start command**
+
+```
+uv run gunicorn config.wsgi
+```
+
+**Environment variables** (set in Render → Environment; never commit the values)
+
+| Name | What it is |
+|---|---|
+| `PYTHON_VERSION` | `3.13` |
+| `SECRET_KEY` | Long random string, different from local |
+| `DATABASE_URL` | Neon connection string (pooling off) |
+| `ALLOWED_HOSTS` | `ereceipt-network.onrender.com` |
+| `CSRF_TRUSTED_ORIGINS` | `https://ereceipt-network.onrender.com` |
+
+`DEBUG` is not set in production, so it defaults to off.
+
+To create an admin user on the live database, run from your Mac:
+`DATABASE_URL='<neon string>' uv run python manage.py createsuperuser`
+
 ## Layout
 
 ```
