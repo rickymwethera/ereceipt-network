@@ -8,7 +8,7 @@ owner or accountant downloads a monthly spreadsheet of valid expenses for filing
 Why it matters: since 1 January 2026, an expense without a valid eTIMS invoice can't
 be deducted. A lost or invalid receipt costs the business real money.
 
-This is v1 of a larger receipt routing network. See [docs/ROADMAP.md](docs/ROADMAP.md)
+This is v0.1 of a larger receipt routing network. See [docs/ROADMAP.md](docs/ROADMAP.md)
 for the build steps and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the stack and
 why each piece was chosen.
 
