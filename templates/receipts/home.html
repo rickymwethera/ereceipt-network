@@ -1,0 +1,9 @@
+<h1>Hello {{ user.username }}</h1>
+<h2>Your businesses</h2>
+<ul>
+  {% for m in memberships %}
+    <li>{{ m.business.name }} ({{ m.get_role_display }})</li>
+  {% empty %}
+    <li>You're not part of any business yet.</li>
+  {% endfor %}
+</ul>
